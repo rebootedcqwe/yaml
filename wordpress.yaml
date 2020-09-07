@@ -1,0 +1,37 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: blog
+  labels:
+    app: blog
+spec:
+  selector: 
+    matchLabels:
+      app: blog 
+  template:
+    metadata: 
+      labels:
+        app: blog 
+    spec:
+      volumes:
+      - name: mysql-blog-storage
+        persistentVolumeClaim: 
+          claimName: myclaim1
+      containers:
+      - image: hub.c.163.com/library/wordpress:latest
+        name: blog
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql
+        - name: WORDPRESS_DB_USER
+          value: root
+        - name: WORDPRESS_DB_PASSWORD
+          value: redhat
+        - name: WORDPRESS_DB_NAME
+          value: blog
+        ports:
+        - containerPort: 80
+          name: blog
+        volumeMounts:
+        - name: mysql-blog-storage
+          mountPath: /var/www/html

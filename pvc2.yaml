@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim 
+apiVersion: v1
+metadata:
+  name: myclaim2
+spec:
+  storageClassName: xxc
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem 
+  resources:
+    requests: 
+      storage: 5Gi

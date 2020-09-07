@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: pv01 
+spec:
+  capacity: 
+    storage: 5Gi
+  volumeMode: Filesystem 
+  storageClassName: aabb
+  accessModes:
+    - ReadWriteOnce 
+  persistentVolumeReclaimPolicy: Recycle 
+  nfs:
+    path: /pv01
+    server: 192.168.97.60

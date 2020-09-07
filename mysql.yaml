@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: mysql 
+  labels:
+    app: db 
+spec:
+  selector: 
+    matchLabels:
+      app: db 
+  template:
+    metadata: 
+      labels:
+        app: db 
+    spec: 
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim: 
+          claimName: myclaim2
+      containers:
+      - image: hub.c.163.com/library/mysql:latest
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: redhat
+        - name: MYSQL_DATABASE
+          value: blog
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql/

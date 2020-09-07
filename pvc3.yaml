@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim 
+apiVersion: v1
+metadata:
+  name: jenkins-k8s-pvc
+spec:
+  storageClassName: xssf
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem 
+  resources:
+    requests: 
+      storage: 5Gi
